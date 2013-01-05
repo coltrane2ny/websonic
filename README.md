@@ -1,6 +1,4 @@
-test
-====
+websonic
+========
 
-test repo
-modified
-
+This is subsonic web client made by python.
