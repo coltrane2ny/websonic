@@ -35,6 +35,8 @@ if __name__ == "__main__":
 </div>
 """
 
+    conf = subsonic.Config('config.txt')
+    s = subsonic.Subsonic(conf)
     body = '<body>\n'
     body = body + ('<h1><a name="head">%s</a></h1>\n' % TITLE)
 
@@ -43,7 +45,7 @@ if __name__ == "__main__":
 
     parser = make_parser()
 
-    xmlFile = urllib.urlopen(subsonic.get_url("search", query))
+    xmlFile = urllib.urlopen(s.get_url("search", query))
 
     parser.setContentHandler(handler)
     parser.parse(xmlFile)

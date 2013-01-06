@@ -19,6 +19,8 @@ if __name__ == "__main__":
 </div>
 """
 
+    conf = subsonic.Config('config.txt')
+    s = subsonic.Subsonic(conf)
     body = '<body>\n'
     body = body + ('<h1><a name="head">%s</a></h1>\n' % TITLE)
     body = body + subsonic.get_index_links()
@@ -28,7 +30,7 @@ if __name__ == "__main__":
 
     parser = make_parser()
 
-    xmlFile = urllib.urlopen(subsonic.get_url('getIndexes', ''))
+    xmlFile = urllib.urlopen(s.get_url('getIndexes', ''))
 
     parser.setContentHandler(handler)
     parser.parse(xmlFile)

@@ -1,0 +1,11 @@
+{
+	"host": "localhost",
+	"port": "8180",
+	"rest": {
+		"base": "/subsonic/rest/",
+		"user": "user",
+		"pass": "pass",
+		"version": "1.1.0",
+		"client_name": "websonic"
+	}
+}

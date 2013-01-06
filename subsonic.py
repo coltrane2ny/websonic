@@ -1,27 +1,37 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-host = "localhost"
-port = "8180"
-resturl = "http://" + host + ":" + port + "/subsonic/rest/"
-q_user = "user"
-q_pass = "pass"
-q_ver = "1.1.0"
-q_cli = "websonic"
+import json
+
+class Config:
+  def __init__(self, filepath):
+    f = open(filepath).read()
+    self.config = json.loads(f)
+    self.resturl = "http://"\
+      + self.config["host"] + ":" + self.config["port"]\
+      + self.config["rest"]["base"]
+
+  def get(self, key):
+    return self.config[key]
+
+class Subsonic:
+  def __init__(self, config):
+    self.config = config
+
+  def get_url(self, func, queries):
+    url = self.config.resturl\
+      + "/" + func + ".view"\
+      + "?u=" + self.config.get("rest")["user"]\
+      + "&p=" + self.config.get("rest")["pass"]\
+      + "&v=" + self.config.get("rest")["version"]\
+      + "&c=" + self.config.get("rest")["client_name"]\
+      + "&" + queries
+    return url
 
 def error(str):
     print "Content-Type: text/html\n"
     print str
     exit(1)
-
-def get_url(func, queries):
-    url = resturl\
-        + func + ".view?"\
-        + "u=" + q_user + "&" + "p=" + q_pass + "&"\
-        + "v=" + q_ver + "&" + "c=" + q_cli + "&"\
-        + queries
-    
-    return url
 
 def print_header(title, cssPath):
     print """Content-Type: text/html
@@ -74,7 +84,11 @@ def get_index_links():
 
 ### unittest
 if __name__ == '__main__':
-    print get_url("search", "a=bcd&moge=fuga")
+    c = Config('config.txt')
+    print c.get('host')
+    print c.get('rest')['base']
+    s = Subsonic(c)
+    print s.get_url("search", "a=bcd&moge=fuga")
     print_header("test", "./style.css")
     print get_index_links()
     error("test test")
