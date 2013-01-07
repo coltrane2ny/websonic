@@ -30,7 +30,7 @@ if __name__ == "__main__":
 
     parser = make_parser()
 
-    xmlFile = urllib.urlopen(s.get_url('getIndexes', ''))
+    xmlFile = urllib.urlopen(s.get_url('getArtists', ''))
 
     parser.setContentHandler(handler)
     parser.parse(xmlFile)
