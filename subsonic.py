@@ -48,6 +48,14 @@ def print_header(title, cssPath):
 </head>
 """ % (title, cssPath)
 
+def get_player():
+  return """
+<div class="player">
+  <button class="play">play</button>
+  <button class="stop">stop</button>
+</div>
+"""
+
 def get_index_links():
     index_links = """
 <table class="index_link">

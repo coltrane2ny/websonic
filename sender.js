@@ -1,7 +1,6 @@
 $(function(){
 	var streamBaseUrl;
-	var playerUrl;
-	var playerBin;
+	var player;
 	$.getJSON(
 		"config.json",
 		function(json, status){
@@ -11,17 +10,29 @@ $(function(){
 				'&p=' + json.subsonic.rest.pass + 
 				'&v=' + json.subsonic.rest.version + 
 				'&c=' + json.subsonic.rest.clientName;
-			playerUrl = 'http://' + json.player.host + ':' + json.player.port + '/play';
-			playerBin = json.player.player;
+			player = json.player;
 		}
 	);
 
 	$("button.play").click(function(){
 		var songId = $(this).attr("id");
 		var streamUrl = streamBaseUrl + '&id=' + songId;
-		$.get(playerUrl, {
+		request(player, 'play', {
 			stream: streamUrl,
-			player: playerBin,
+			command: player.command,
+			options: player.options
 		});
 	});
+
+	$("button.stop").click(function(){
+		request(player, 'stop', {});
+	});
+
+	function request(player, method, json){
+		var url = 'http://' + player.host + ':' + player.port + '/' + method;
+		$.ajax(url, {
+			cache: false,
+			data: json
+		});
+	}
 });
