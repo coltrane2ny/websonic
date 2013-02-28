@@ -7,9 +7,10 @@ class Config:
   def __init__(self, filepath):
     f = open(filepath).read()
     self.config = json.loads(f)
+    self.subsonic = self.config.get("subsonic")
     self.resturl = "http://"\
-      + self.config["host"] + ":" + self.config["port"]\
-      + self.config["rest"]["base"]
+      + self.subsonic["host"] + ":" + self.subsonic["port"]\
+      + self.subsonic["rest"]["base"]
 
   def get(self, key):
     return self.config[key]
@@ -21,10 +22,10 @@ class Subsonic:
   def get_url(self, func, queries):
     url = self.config.resturl\
       + "/" + func + ".view"\
-      + "?u=" + self.config.get("rest")["user"]\
-      + "&p=" + self.config.get("rest")["pass"]\
-      + "&v=" + self.config.get("rest")["version"]\
-      + "&c=" + self.config.get("rest")["client_name"]\
+      + "?u=" + self.config.subsonic["rest"]["user"]\
+      + "&p=" + self.config.subsonic["rest"]["pass"]\
+      + "&v=" + self.config.subsonic["rest"]["version"]\
+      + "&c=" + self.config.subsonic["rest"]["clientName"]\
       + "&" + queries
     return url
 
@@ -40,8 +41,10 @@ def print_header(title, cssPath):
 <html lang="ja">
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<script type="text/javascript" src="./jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="./sender.js"></script>
 <title>%s</title>
-<link rel="stylesheet" type="text/css" href="%s">
+<link rel="stylesheet" type="text/css" href="%s" />
 </head>
 """ % (title, cssPath)
 
@@ -84,7 +87,7 @@ def get_index_links():
 
 ### unittest
 if __name__ == '__main__':
-    c = Config('config.txt')
+    c = Config('config.json')
     print c.get('host')
     print c.get('rest')['base']
     s = Subsonic(c)

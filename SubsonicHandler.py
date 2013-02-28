@@ -81,4 +81,6 @@ class AlbumHandler(ContentHandler):
             self.contents.append(attrs.get('artist', "").encode('utf-8'))
             self.contents.append('</td><td>')
             self.contents.append(attrs.get('title', "").encode('utf-8'))
+            self.contents.append('</td><td>')
+            self.contents.extend(['<button class="play" id="', urllib.quote(attrs['id'].encode('utf-8')), '">play</button>'])
             self.contents.append('</td></tr>\n')

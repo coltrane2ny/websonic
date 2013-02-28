@@ -35,7 +35,7 @@ if __name__ == "__main__":
 </div>
 """
 
-    conf = subsonic.Config('config.txt')
+    conf = subsonic.Config('config.json')
     s = subsonic.Subsonic(conf)
     body = '<body>\n'
     body = body + ('<h1><a name="head">%s</a></h1>\n' % TITLE)
