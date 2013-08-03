@@ -1,0 +1,7 @@
+extends layout
+
+block content
+	script(src='/javascripts/album.js', type='text/javascript')
+	h1= title
+	for album in albums
+		div(class='album', id='#{album.id}')

@@ -1,0 +1,14 @@
+extends layout
+
+block content
+	h1= title
+	include alphabet_index
+	ul
+		for artist in artists
+			if (artist.tag == 'index')
+				li
+					a(name='#{artist.name}')= artist.name
+			if (artist.tag == 'artist')
+				ul
+					li
+						a(href='artist/#{artist.id}')= artist.name

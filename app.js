@@ -6,6 +6,8 @@
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
+  , subsonic = require('./routes/subsonic')
+  , api_subsonic = require('./routes/api_subsonic')
   , http = require('http')
   , path = require('path');
 
@@ -29,6 +31,9 @@ app.configure('development', function(){
 
 app.get('/', routes.index);
 app.get('/users', user.list);
+app.get('/subsonic', subsonic.artists);
+app.get('/subsonic/artist/:id', subsonic.artist);
+app.get('/api/subsonic/album/:id', api_subsonic.album);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
