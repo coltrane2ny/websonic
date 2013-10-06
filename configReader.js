@@ -9,6 +9,8 @@ exports.httpOptions = function(target) {
 	};
 };
 
+exports.config = config;
+
 function getPath(target) {
 	var restBase = config.subsonic.rest.base;
 	var user = config.subsonic.rest.user;

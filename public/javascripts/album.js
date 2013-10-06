@@ -21,7 +21,6 @@ $(document).ready(function() {
 	});
 	$('.album').on('click', '.play', function() {
 		var songId = $(this).attr('id');
-		console.log(songId);
 		$.getJSON('/api/subsonic/play/' + songId, function(json) {
 
 		});

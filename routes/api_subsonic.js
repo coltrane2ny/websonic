@@ -20,13 +20,24 @@ exports.album = function(req, res) {
 	});
 };
 
-exports.play = function(req, res) {
+exports.play = function(req, res) {	
 	var songId = req.params.id;
 	console.log('=== API play[song id: ' + songId + '] ===');
+	res.json({});
 
 	var options = configReader.httpOptions({
 		method: 'stream',
 		id: songId
 	});
-	console.log('url: http://' + options.hostname + ':' + options.port + options.path);
+	var url = 'http://' + options.hostname + ':' + options.port + options.path;
+	console.log('url: ' + url);
+
+	var child_process = require("child_process");
+	var command = configReader.config.player.command;
+	var cmd_options = configReader.config.player.options;
+	cmd_options.push(url);
+	var child = child_process.spawn(command, cmd_options);
+	child.stdout.on('end', function() {
+		console.log("player process end");
+	});
 };
