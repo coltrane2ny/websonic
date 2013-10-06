@@ -19,3 +19,14 @@ exports.album = function(req, res) {
   		console.log('error: ' + e.message);
 	});
 };
+
+exports.play = function(req, res) {
+	var songId = req.params.id;
+	console.log('=== API play[song id: ' + songId + '] ===');
+
+	var options = configReader.httpOptions({
+		method: 'stream',
+		id: songId
+	});
+	console.log('url: http://' + options.hostname + ':' + options.port + options.path);
+};

@@ -26,7 +26,7 @@ AlbumHandler.prototype.onEnd = function(response) {
 			console.log('sax parser error: ' + e.message);
 		};
 		parser.onattribute = function(attr) {
-  			console.log('sax parser tag: ' + parser.tag.name + ' attr: ' + attr.name + ': ' + attr.value);
+  			//console.log('sax parser tag: ' + parser.tag.name + ' attr: ' + attr.name + ': ' + attr.value);
   			var attrname = attr.name;
   			if (attrname === 'title'
   				|| attrname === 'album'
@@ -35,7 +35,7 @@ AlbumHandler.prototype.onEnd = function(response) {
   			}
 		};
 		parser.onopentag = function(node) {
-			console.log('sax parser opentag: ' + node.name);
+			//console.log('sax parser opentag: ' + node.name);
 			if (node.name === 'song') {
 				albumArray.push(album);
 				album = {};				

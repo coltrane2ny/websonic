@@ -24,6 +24,8 @@ function getPath(target) {
 		path = restBase + '/getArtist.view' + auth + '&id=' + target.id;
 	else if (target.method === 'album')
 		path = restBase + '/getAlbum.view' + auth + '&id=' + target.id;
+	else if (target.method === 'stream')
+		path = restBase + '/stream.view' + auth + '&id=' + target.id;
 	
 	return path;
 }
