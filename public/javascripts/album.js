@@ -21,8 +21,16 @@ $(document).ready(function() {
 	});
 	$('.album').on('click', '.play', function() {
 		var songId = $(this).attr('id');
-		$.getJSON('/api/subsonic/play/' + songId, function(json) {
+		$.getJSON('/api/subsonic/play/' + songId, function(json) {});
+	});
 
-		});
+	$('#playButton').on('click', function() {
+		$.getJSON('/api/subsonic/play', function(json) {});
+	});
+	$('#pauseButton').on('click', function() {
+		$.getJSON('/api/subsonic/pause/', function(json) {});
+	});
+	$('#stopButton').on('click', function() {
+		$.getJSON('/api/subsonic/stop/', function(json) {});
 	});
 });

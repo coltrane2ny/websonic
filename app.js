@@ -35,6 +35,9 @@ app.get('/subsonic', subsonic.artists);
 app.get('/subsonic/artist/:id', subsonic.artist);
 app.get('/api/subsonic/album/:id', api_subsonic.album);
 app.get('/api/subsonic/play/:id', api_subsonic.play);
+app.get('/api/subsonic/play', api_subsonic.play);
+app.get('/api/subsonic/pause/', api_subsonic.pause);
+app.get('/api/subsonic/stop/', api_subsonic.stop);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
