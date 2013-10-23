@@ -68,7 +68,9 @@ ArtistHandler.prototype.onEnd = function (response) {
 			}
 
   			response.render('subsonicArtist', {
-				title: artist.name,
+  				logo: 'Websonic',
+				title: 'Websonic :' + artist.name,
+				artist: artist.name,
 				albums: albumArray,
 			});
 		};

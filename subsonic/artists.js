@@ -55,6 +55,7 @@ ArtistsHandler.prototype.onEnd = function(response) {
 		parser.onend = function() {
 			console.log('sax parser end.');
 			response.render('subsonic', {
+				logo: 'Websonic',
 				title: 'Websonic :artists',
 				artists: artistArray
 			});

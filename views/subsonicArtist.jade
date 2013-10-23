@@ -1,10 +1,16 @@
 extends layout
 
+append header
+  .navi
+    a(href='/') TOP
+    |  > #{artist}
+
 block content
-	script(src='/javascripts/album.js', type='text/javascript')
-	button(id='playButton') Play
-	button(id='pauseButton') Pause
-	button(id='stopButton') Stop
-	h1= title
-	for album in albums
-		div(class='album', id='#{album.id}')
+  script(src='/javascripts/album.js', type='text/javascript')
+  .controller
+    button(id='pauseButton') Pause
+    button(id='stopButton') Stop
+  h2= artist
+  for album in albums
+    div(class='album', id='#{album.id}')
+      h3 #{album.name}

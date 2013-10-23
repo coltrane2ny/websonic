@@ -4,10 +4,8 @@
  */
 
 var express = require('express')
-  , routes = require('./routes')
-  , user = require('./routes/user')
   , subsonic = require('./routes/subsonic')
-  , api_subsonic = require('./routes/api_subsonic')
+  , player = require('./routes/player')
   , http = require('http')
   , path = require('path');
 
@@ -29,15 +27,12 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
-app.get('/users', user.list);
-app.get('/subsonic', subsonic.artists);
-app.get('/subsonic/artist/:id', subsonic.artist);
-app.get('/api/subsonic/album/:id', api_subsonic.album);
-app.get('/api/subsonic/play/:id', api_subsonic.play);
-app.get('/api/subsonic/play', api_subsonic.play);
-app.get('/api/subsonic/pause/', api_subsonic.pause);
-app.get('/api/subsonic/stop/', api_subsonic.stop);
+app.get('/', subsonic.artists);
+app.get('/artist/:id', subsonic.artist);
+app.get('/json/album/:id', subsonic.album);
+app.get('/player/play/:id', player.play);
+app.get('/player/pause/', player.pause);
+app.get('/player/stop/', player.stop);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
