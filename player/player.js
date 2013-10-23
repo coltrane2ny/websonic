@@ -13,25 +13,23 @@ var Player = function (command, options) {
 
 	Player.prototype.play = function (url) {
 		if (url) {
-			if (this.child) {
-				this.child.stdin.write('loadfile ' + url + '\n');
-			}
+			this.sendCommand('loadfile ' + url);
 		} else {
-			if (this.child) {
-				this.child.stdin.write('play\n');
-			}			
+			// what to do?
 		}
 	};
 
 	Player.prototype.stop = function () {
-		if (this.child) {
-			this.child.stdin.write('stop\n');			
-		}
+		this.sendCommand('stop');
 	};
 
 	Player.prototype.pause = function () {
+		this.sendCommand('pause');
+	};
+
+	Player.prototype.sendCommand = function (cmd) {
 		if (this.child) {
-			this.child.stdin.write('pause\n');
+			this.child.stdin.write(cmd + '\n');
 		}
 	};
 };
