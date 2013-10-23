@@ -1,4 +1,6 @@
 var sax = require('sax');
+var fs = require('fs');
+var jade = require('jade');
 
 exports.handler = function() {
 	return new AlbumHandler();
@@ -46,7 +48,10 @@ AlbumHandler.prototype.onEnd = function(response) {
 		};
 		parser.onend = function() {
 			console.log('sax parser end.');
-			response.json(albumArray);
+			var html = jade.compile(fs.readFileSync('views/album.jade', 'utf-8'));
+			response.json({
+				html: html({albums: albumArray})
+			});
 		};
 
 		parser.write(this.body).close();

@@ -3,12 +3,7 @@ $(document).ready(function() {
 		var div = $(this);
 		var albumId = $(div).attr('id');
 		$.getJSON('/json/album/' + albumId, function(json) {
-			var table = $("<table/>").appendTo(div);
-			for (var i = 0; i < json.length; i++) {
-				$(table).append('<tr><td>'
-					+ json[i].title + '</td><td>'
-					+ '<div class="play" id="' + json[i].id + '">play</div>' + '</td></tr>');
-			};
+			$(json.html).appendTo(div);
 		});
 	});
 

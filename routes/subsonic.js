@@ -37,7 +37,7 @@ exports.artist = function(req, res) {
 
 exports.album = function(req, res) {
 	var albumId = req.params.id;
-	console.log('=== API album[id: ' + albumId + '] ===');
+	console.log('=== album[id: ' + albumId + '] ===');
 	var options = configReader.httpOptions({
 		method: 'album',
 		id: albumId
