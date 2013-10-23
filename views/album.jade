@@ -1,6 +1,7 @@
 table
-  each album in albums
+  each album, index in albums
     tr
-      td #{album.title}
-      td
+      td.index= index + 1
+      td= album.title
+      td.play
         div(class="play", id="#{album.id}") play

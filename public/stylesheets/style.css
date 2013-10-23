@@ -33,8 +33,18 @@ h1 {
 }
 
 .album table {
+  width: 500px;
   margin-left: 10px;
 }
+
 .album td {
   border-bottom: 1px #aaaaaa solid;
+}
+
+.album td.index {
+  width: 20px;
+}
+
+.album td.play {
+  width: 40px;
 }
